@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TodolistWebApp.Data;
 using TodolistWebApp.Models;
 
@@ -65,6 +66,50 @@ public class TodoController : Controller
     public IActionResult EditTodo(int id, Todo todo)
     {
         _context.Todos.Update(todo);
+        _context.SaveChanges();
+        return RedirectToAction("Index");
+    }
+
+    [HttpPost]
+    public IActionResult UndoCompletion(int id)
+    {
+        var todo = _context.Todos.AsNoTracking().FirstOrDefault(x => x.Id == id);
+
+        if (todo == null)
+        {
+            return NotFound();
+        }
+
+        var temp = new Todo
+        {
+            Id = todo.Id,
+            TodoText = todo.TodoText,
+            IsCompleted = false
+        };
+            
+        _context.Todos.Update(temp);
+        _context.SaveChanges();
+        return RedirectToAction("Index");
+    }
+    
+    [HttpPost]
+    public IActionResult Completion(int id)
+    {
+        var todo = _context.Todos.AsNoTracking().FirstOrDefault(x => x.Id == id);
+
+        if (todo == null)
+        {
+            return NotFound();
+        }
+
+        var temp = new Todo
+        {
+            Id = todo.Id,
+            TodoText = todo.TodoText,
+            IsCompleted = true
+        };
+            
+        _context.Todos.Update(temp);
         _context.SaveChanges();
         return RedirectToAction("Index");
     }
