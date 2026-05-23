@@ -52,4 +52,20 @@ public class TodoController : Controller
         _context.SaveChanges();
         return RedirectToAction("Index");
     }
+
+    [HttpGet]
+    public IActionResult EditTodo(int id)
+    {
+        var todo = _context.Todos.FirstOrDefault(x => x.Id == id);
+
+        return View(todo);
+    }
+
+    [HttpPost]
+    public IActionResult EditTodo(int id, Todo todo)
+    {
+        _context.Todos.Update(todo);
+        _context.SaveChanges();
+        return RedirectToAction("Index");
+    }
 }
