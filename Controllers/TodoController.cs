@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using TodolistWebApp.Data;
+using TodolistWebApp.Models;
 
 namespace TodolistWebApp.Controllers;
 
@@ -19,7 +20,36 @@ public class TodoController : Controller
         
         return View(todos);
     }
+
     
-    
-    
+    public IActionResult CreateTodo()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public IActionResult CreateTodo(Todo todo)
+    {
+        var temp = todo;
+        
+        _context.Todos.Add(temp);
+        _context.SaveChanges();
+        
+        return RedirectToAction("Index");
+    }
+
+    [HttpPost]
+    public IActionResult DeleteTodo(int id)
+    {
+        var todo = _context.Todos.FirstOrDefault(x => x.Id == id);
+
+        if (todo == null)
+        {
+            return NotFound();
+        }
+        
+        _context.Todos.Remove(todo);
+        _context.SaveChanges();
+        return RedirectToAction("Index");
+    }
 }

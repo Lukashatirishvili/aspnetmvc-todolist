@@ -1,0 +1,29 @@
+@model TodolistWebApp.Models.Todo
+
+@{
+    ViewData["Title"] = "Create Todo";
+}
+
+<h2>Create Todo</h2>
+
+<form asp-action="CreateTodo" method="post">
+
+    <div class="mb-3">
+        <label asp-for="TodoText" class="form-label"></label>
+
+        <input asp-for="TodoText" class="form-control" />
+
+        <span asp-validation-for="TodoText" class="text-danger"></span>
+    </div>
+
+    <div class="form-check mb-3">
+        <input asp-for="IsCompleted" class="form-check-input" />
+
+        <label asp-for="IsCompleted" class="form-check-label"></label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Create
+    </button>
+
+</form>
