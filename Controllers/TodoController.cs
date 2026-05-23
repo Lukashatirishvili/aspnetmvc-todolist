@@ -1,13 +1,25 @@
 using Microsoft.AspNetCore.Mvc;
+using TodolistWebApp.Data;
 
 namespace TodolistWebApp.Controllers;
 
 public class TodoController : Controller
 {
-    // GET
+    private readonly TodolistDbContext _context;
+
+    public TodoController(TodolistDbContext context)
+    {
+        _context = context;
+    }
+    
+    [HttpGet]
     public IActionResult Index()
     {
-        return View();
+        var todos = _context.Todos.ToList();
+        
+        return View(todos);
     }
+    
+    
     
 }
