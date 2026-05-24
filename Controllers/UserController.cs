@@ -39,7 +39,7 @@ public class UserController : Controller
         
         HttpContext.Session.SetInt32("UserId", userExist.Id);
         
-        return RedirectToAction("Index", "Home");
+        return RedirectToAction("Index", "Todo");
     }
 
     [HttpGet]
@@ -63,16 +63,17 @@ public class UserController : Controller
             return View(user);
         }
         
-        HttpContext.Session.SetInt32("UserId", user.Id);
+        
         _context.Users.Add(user);
         _context.SaveChanges();
+        HttpContext.Session.SetInt32("UserId", user.Id);
         
-        return RedirectToAction("Index", "Home");
+        return RedirectToAction("Index", "Todo");
     }
 
     public IActionResult Logout()
     {
         HttpContext.Session.Remove("UserId");
-        return RedirectToAction("Index", "Home");
+        return RedirectToAction("Index", "Todo");
     }
 }

@@ -1,8 +1,13 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+@{
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-center mt-5">
+    <h1 class="display-4">Welcome to My Todolist App</h1>
+    <p class="lead mt-3">
+        To start adding your todos, please <a asp-controller="User" asp-action="Login">log in</a>.
+    </p>
+    <p>
+        If you don’t have an account yet, please <a asp-controller="User" asp-action="Register">register</a>.
+    </p>
 </div>
