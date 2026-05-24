@@ -8,7 +8,12 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<TodolistDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession();
+
 var app = builder.Build();
+
+app.UseSession();
 
 /*
 using (var scope = app.Services.CreateScope())

@@ -12,6 +12,7 @@ public class TodolistDbContext :DbContext
     
     public DbSet<Todo>  Todos { get; set; }
     public DbSet<User>  Users { get; set; }
+    public DbSet<RegisterUser>  RegisterUsers { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@{
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
@@ -30,15 +33,28 @@
                         <a class="nav-link text-dark" asp-area="" asp-controller="Todo" asp-action="Index">Todolist</a>
                     </li>
                 </ul>
-
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Login">Log in</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Register">Register</a>
-                    </li>
-                </ul>
+                
+                @if (Context.Session.GetInt32("UserId") != null)
+                {
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <form type="submit" asp-action="Logout" asp-controller="User" style="display:inline;">
+                            <li class="nav-item">
+                            <button type="submit" class="nav-link text-dark">Logout</button>
+                            </li>
+                        </form>
+                    </ul>
+                }
+                else
+                {
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Login">Log in</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Register">Register</a>
+                        </li>
+                    </ul>
+                }
             </div>
 
         </div>

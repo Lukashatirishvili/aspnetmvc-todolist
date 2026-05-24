@@ -1,0 +1,30 @@
+@model TodolistWebApp.Models.User
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<form method="post" asp-controller="User" asp-action="Register" class="mt-5">
+    
+    <div class="form-group mb-2">
+        <label asp-for="UserName" >Username</label>
+        <input asp-for="UserName" type="text" class="form-control" >
+        <span asp-validation-for="UserName" class="text-danger"></span>
+    </div>
+    
+    <div class="form-group mb-2">
+        <label asp-for="Email">Email address</label>
+        <input asp-for="Email" type="email" class="form-control">
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    
+    <div class="form-group mb-3">
+        <label asp-for="Password" >Password</label>
+        <input asp-for="Password" type="password" class="form-control" >
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    
+    <div asp-validation-summary="All" class="text-danger"></div>
+    
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
