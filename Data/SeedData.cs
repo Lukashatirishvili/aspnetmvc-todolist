@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+/* using Microsoft.EntityFrameworkCore;
 using TodolistWebApp.Models;
 
 namespace TodolistWebApp.Data;
@@ -39,3 +39,5 @@ public class SeedData
         context.SaveChanges();
     }
 }
+
+*/

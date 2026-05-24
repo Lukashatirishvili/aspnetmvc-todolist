@@ -11,4 +11,15 @@ public class TodolistDbContext :DbContext
     }
     
     public DbSet<Todo>  Todos { get; set; }
+    public DbSet<User>  Users { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Todo>()
+            .HasOne(x => x.User)
+            .WithMany(x => x.Todos)
+            .HasForeignKey(t => t.UserId);
+        
+        base.OnModelCreating(modelBuilder);
+    }
 }
