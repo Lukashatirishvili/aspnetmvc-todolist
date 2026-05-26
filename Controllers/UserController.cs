@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using TodolistWebApp.Data;
-using TodolistWebApp.Models;
+using Todolist.Domain.Entities;
+using Todolist.Infrastructure.Data;
 using TodolistWebApp.ViewModels;
 
 namespace TodolistWebApp.Controllers;

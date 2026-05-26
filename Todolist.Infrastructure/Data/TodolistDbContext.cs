@@ -1,7 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using TodolistWebApp.Models;
 
-namespace TodolistWebApp.Data;
+using Todolist.Domain.Entities;
+namespace Todolist.Infrastructure.Data;
+
 
 public class TodolistDbContext :DbContext
 {

@@ -2,6 +2,12 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodolistWebApp", "TodolistWebApp.csproj", "{849FB10D-037C-4814-8169-9E488FE39400}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todolist.Domain", "Todolist.Domain\Todolist.Domain.csproj", "{0F71B366-EC0C-4F0D-B003-4EBD27D600BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todolist.Application", "Todolist.Application\Todolist.Application.csproj", "{203CBD2E-20A6-4FF0-8F72-382A2AC8CF19}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todolist.Infrastructure", "Todolist.Infrastructure\Todolist.Infrastructure.csproj", "{96677659-EDB4-4C1A-917F-D9C57282B79C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +18,17 @@ Global
 		{849FB10D-037C-4814-8169-9E488FE39400}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{849FB10D-037C-4814-8169-9E488FE39400}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{849FB10D-037C-4814-8169-9E488FE39400}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F71B366-EC0C-4F0D-B003-4EBD27D600BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F71B366-EC0C-4F0D-B003-4EBD27D600BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F71B366-EC0C-4F0D-B003-4EBD27D600BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F71B366-EC0C-4F0D-B003-4EBD27D600BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{203CBD2E-20A6-4FF0-8F72-382A2AC8CF19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{203CBD2E-20A6-4FF0-8F72-382A2AC8CF19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{203CBD2E-20A6-4FF0-8F72-382A2AC8CF19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{203CBD2E-20A6-4FF0-8F72-382A2AC8CF19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96677659-EDB4-4C1A-917F-D9C57282B79C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96677659-EDB4-4C1A-917F-D9C57282B79C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96677659-EDB4-4C1A-917F-D9C57282B79C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96677659-EDB4-4C1A-917F-D9C57282B79C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

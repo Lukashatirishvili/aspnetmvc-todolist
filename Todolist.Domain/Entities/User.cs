@@ -1,4 +1,4 @@
-namespace TodolistWebApp.Models;
+namespace Todolist.Domain.Entities;
 
 public class User
 {

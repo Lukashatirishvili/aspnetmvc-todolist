@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using TodolistWebApp.Data;
-using TodolistWebApp.Models;
+using Todolist.Domain.Entities;
+using Todolist.Infrastructure.Data;
 
 namespace TodolistWebApp.Controllers;
 

@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace TodolistWebApp.Migrations
+namespace Todolist.Infrastructure.Migrations
 {
     /// <inheritdoc />
     public partial class registerUser : Migration

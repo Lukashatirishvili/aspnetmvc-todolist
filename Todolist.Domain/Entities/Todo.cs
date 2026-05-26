@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TodolistWebApp.Models;
+namespace Todolist.Domain.Entities;
 
 public class Todo
 {
