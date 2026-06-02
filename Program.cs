@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using Todolist.Application.Services;
+using Todolist.Domain.Interfaces;
 using Todolist.Infrastructure.Data;
+using Todolist.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +13,10 @@ builder.Services.AddDbContext<TodolistDbContext>(options => options.UseSqlServer
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
+
+// Register Repository
+builder.Services.AddScoped<ITodoRepository, TodoRepository>();
+builder.Services.AddScoped<ITodoService, TodoService>();
 
 var app = builder.Build();
 

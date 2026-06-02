@@ -1,21 +1,29 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Todolist.Application.Services;
+using Todolist.Application.DTOs;
 using Todolist.Domain.Entities;
+using Todolist.Domain.Interfaces;
 using Todolist.Infrastructure.Data;
+
 
 namespace TodolistWebApp.Controllers;
 
 public class TodoController : Controller
 {
+    private readonly ITodoRepository _todoRepository;
     private readonly TodolistDbContext _context;
+    private readonly ITodoService _todoService;
 
-    public TodoController(TodolistDbContext context)
+    public TodoController(ITodoRepository todoRepository, TodolistDbContext context, ITodoService todoService)
     {
+        _todoRepository = todoRepository;
         _context = context;
+        _todoService = todoService;
     }
     
     [HttpGet]
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
         var userId = HttpContext.Session.GetInt32("UserId");
 
@@ -24,7 +32,7 @@ public class TodoController : Controller
             return RedirectToAction("Login", "User");
         }
         
-        var todos = _context.Todos.Where(x => x.UserId == userId).ToList();
+        var todos = await _todoService.GetAllTodosByUserIdAsync(userId.Value);
         
         return View(todos);
     }
@@ -44,57 +52,51 @@ public class TodoController : Controller
     }
 
     [HttpPost]
-    public IActionResult CreateTodo(Todo todo)
+    [ValidateAntiForgeryToken] // This protects against CSRF attacks
+    public async Task<IActionResult> CreateTodo(CreateTodoRequest todoRequest)
     {
         var userId = HttpContext.Session.GetInt32("UserId");
 
-        if (userId == null)
-        {
-            return RedirectToAction("Login", "User");
-        }
+        if (userId == null) return RedirectToAction("Login", "User");
         
-        todo.UserId = userId.Value;
-        var temp = todo;
+        if (!ModelState.IsValid) return View(todoRequest);
         
-        _context.Todos.Add(temp);
-        _context.SaveChanges();
+        await _todoService.CreateTodoAsync(todoRequest, userId.Value);
         
         return RedirectToAction("Index");
     }
 
     [HttpPost]
-    public IActionResult DeleteTodo(int id)
+    public async Task<IActionResult> DeleteTodo(int id)
     {
-        var todo = _context.Todos.FirstOrDefault(x => x.Id == id);
 
-        if (todo == null)
+        var result = await _todoService.DeleteTodoAsync(id);
+
+        if (!result)
         {
             return NotFound();
         }
         
-        _context.Todos.Remove(todo);
-        _context.SaveChanges();
         return RedirectToAction("Index");
     }
 
     [HttpGet]
-    public IActionResult EditTodo(int id)
+    public async Task<IActionResult> EditTodo(int id)
     {
         
-        var todo = _context.Todos.FirstOrDefault(x => x.Id == id);
+        var todo = await _todoService.GetTodoByIdAsync(id);
         
 
         return View(todo);
     }
 
     [HttpPost]
-    public IActionResult EditTodo(int id, Todo todo)
+    public async Task<IActionResult> EditTodo(int id, Todo todo)
     {
-        var userId = HttpContext.Session.GetInt32("UserId");
+        var userId = HttpContext.Session.GetInt32("UserId").Value;
 
-        todo.UserId = userId.Value;
-        _context.Todos.Update(todo);
-        _context.SaveChanges();
+        
+        await _todoService.UpdateTodoAsync(todo, userId);
         return RedirectToAction("Index");
     }
 
