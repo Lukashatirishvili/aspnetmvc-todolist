@@ -55,6 +55,26 @@ public class TodoService : ITodoService
     {
         todo.UserId = id;
         await _todoRepository.UpdateTodoAsync(todo);
+        await _todoRepository.SaveChangesAsync();
     }
-    
+
+    public Todo GetTodoByIdAsNoTracking(int id)
+    {
+        return _todoRepository.GetTodoByIdAsNoTracking(id);
+    }
+
+    public async Task TodoCompletionAsync(Todo todo, int? userId, bool action)
+    {
+        var temp = new Todo
+        {
+            Id = todo.Id,
+            TodoText = todo.TodoText,
+            IsCompleted = action,
+            UserId = userId.Value
+            
+        };
+        
+        await _todoRepository.UpdateTodoAsync(temp);
+        await _todoRepository.SaveChangesAsync();
+    }
 }

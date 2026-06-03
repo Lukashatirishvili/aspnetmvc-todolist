@@ -101,53 +101,34 @@ public class TodoController : Controller
     }
 
     [HttpPost]
-    public IActionResult UndoCompletion(int id)
+    public async Task<IActionResult> UndoCompletion(int id)
     {
         var userId = HttpContext.Session.GetInt32("UserId");
-
-        var todo = _context.Todos.AsNoTracking().FirstOrDefault(x => x.Id == id);
+        var todo = _todoService.GetTodoByIdAsNoTracking(id);
 
         if (todo == null)
         {
             return NotFound();
         }
+        
+        await _todoService.TodoCompletionAsync(todo, userId, false);
 
-        var temp = new Todo
-        {
-            Id = todo.Id,
-            TodoText = todo.TodoText,
-            IsCompleted = false,
-            UserId = userId.Value
-
-        };
-            
-        _context.Todos.Update(temp);
-        _context.SaveChanges();
         return RedirectToAction("Index");
     }
     
     [HttpPost]
-    public IActionResult Completion(int id)
+    public async Task<IActionResult> Completion(int id)
     {
         var userId = HttpContext.Session.GetInt32("UserId");
-        var todo = _context.Todos.AsNoTracking().FirstOrDefault(x => x.Id == id);
+        var todo = _todoService.GetTodoByIdAsNoTracking(id);
 
         if (todo == null)
         {
             return NotFound();
         }
+        
+        await _todoService.TodoCompletionAsync(todo, userId, true);
 
-        var temp = new Todo
-        {
-            Id = todo.Id,
-            TodoText = todo.TodoText,
-            IsCompleted = true,
-            UserId = userId.Value
-            
-        };
-            
-        _context.Todos.Update(temp);
-        _context.SaveChanges();
         return RedirectToAction("Index");
     }
 }

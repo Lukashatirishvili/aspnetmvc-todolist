@@ -8,6 +8,7 @@ public interface ITodoRepository
     Task<List<Todo>> GetAllTodosAsync();
     Task<List<Todo>> GetAllTodosByUserIdAsync(int userId);
     Task<Todo> GetTodoByIdAsync(int id);
+    Todo GetTodoByIdAsNoTracking(int id);
     Task AddTodoAsync(Todo task);
     Task DeleteTodoAsync(int id);
     Task UpdateTodoAsync(Todo todo);

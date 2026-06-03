@@ -10,4 +10,6 @@ public interface ITodoService
     public Task<bool> DeleteTodoAsync(int id);
     public Task<Todo> GetTodoByIdAsync(int id);
     public Task UpdateTodoAsync(Todo todo, int id);
+    public Todo GetTodoByIdAsNoTracking(int id);
+    public Task TodoCompletionAsync(Todo todo, int? userId, bool action);
 }
